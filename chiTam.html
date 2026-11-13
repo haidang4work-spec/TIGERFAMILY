@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ TIGER FAMILY ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#ffd700;--pink:#ff2a85;--cyan:#00f2fe}
+html,body{height:100%;overflow:hidden}
+body{
+  font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#fff;
+  user-select:none;-webkit-user-select:none;
+  background: linear-gradient(135deg, #b5d8f7 0%, #88baea 45%, #5b9bd5 80%, #3a75b5 100%);
+  background-attachment:fixed;
+}
+button{font-family:inherit;border:0;cursor:pointer}
+.hidden{display:none!important}
+
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:10}
+
+/* Badge trạng thái */
+#status{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:30;
+  display:flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;
+  background:rgba(15,40,75,.85);border:1px solid rgba(255,255,255,.3);
+  font-size:12px;font-weight:600;color:#fde68a;white-space:nowrap;max-width:94vw;overflow:hidden;text-overflow:ellipsis}
+#status i{width:8px;height:8px;border-radius:50%;background:#34d399;flex:none}
+
+/* Khóa đúng khung hình 100dvh */
+main{position:relative;z-index:20;width:100%;height:100dvh;display:flex;align-items:center;justify-content:center;padding:44px 16px 16px}
+.stage{width:100%;height:80%;max-width:960px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  transition:opacity .5s ease,transform .5s ease}
+.stage.off{opacity:0;visibility:hidden;pointer-events:none;transform:scale(.92) translateY(16px);position:absolute;inset:44px 16px 16px;margin:auto;transition:opacity .4s,transform .4s,visibility 0s .4s}
+
+/* Card chào */
+.card{position:relative;width:100%;max-width:660px;padding:clamp(20px,3.5vh,36px) 24px;border-radius:26px;
+  background:rgba(18,48,88,.84);border:2px solid rgba(252,211,77,.45);
+  box-shadow:0 20px 50px rgba(15,40,75,.35);animation:pop .8s cubic-bezier(.22,1,.36,1) both}
+@keyframes pop{0%{opacity:0;transform:scale(.3) translateY(60px)}60%{opacity:1;transform:scale(1.06) translateY(-8px)}100%{opacity:1;transform:none}}
+.icons{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:10px;font-size:clamp(26px,4vh,36px)}
+.icons span{display:inline-block;animation:bounce 1s infinite}
+.icons span:last-child{animation-delay:.25s}
+@keyframes bounce{0%,100%{transform:translateY(-12%)}50%{transform:none}}
+.trophy{width:clamp(46px,6.5vh,60px);height:clamp(46px,6.5vh,60px);padding:10px;border-radius:14px;background:linear-gradient(135deg,rgba(251,191,36,.3),rgba(236,72,153,.3));border:1px solid rgba(252,211,77,.5);color:#fcd34d}
+.trophy svg{width:100%;height:100%;display:block}
+
+.title{font-family:'Montserrat',sans-serif;font-weight:900;text-transform:uppercase;line-height:1.12;letter-spacing:-.01em;
+  background:linear-gradient(90deg,#fff7cc,#ffd700 30%,#ff8c00 60%,#ffd700 85%,#fff7cc);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  animation:floaty 3s ease-in-out infinite;will-change:transform;
+  filter:drop-shadow(0 2px 8px rgba(15,40,75,.35))}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.card .title{font-size:clamp(26px,min(6vw,6.2vh),54px);margin-bottom:clamp(14px,2.5vh,24px)}
+.sub{color:#ffffff;font-weight:600;line-height:1.45;max-width:680px;margin:0 auto;text-shadow:0 1px 4px rgba(15,40,75,.45)}
+
+.balloon{position:absolute;width:92px;height:120px;pointer-events:none;display:none;will-change:transform}
+.balloon svg{width:100%;height:100%}
+.b1{left:-42px;top:-32px;animation:fl1 4s ease-in-out infinite}
+.b2{right:-42px;top:-28px;animation:fl2 4.5s ease-in-out infinite}
+@keyframes fl1{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-16px) rotate(5deg)}}
+@keyframes fl2{0%,100%{transform:translateY(0) rotate(5deg)}50%{transform:translateY(-12px) rotate(-5deg)}}
+@media(min-width:640px){.balloon{display:block}}
+
+/* Thanh đếm ngược */
+.cd{width:100%;max-width:420px;margin:0 auto;padding:10px 14px;border-radius:14px;background:rgba(10,25,50,.45);border:1px solid rgba(255,255,255,.2)}
+.cd-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;color:#fde68a;margin-bottom:6px}
+.cd-row b{padding:2px 8px;border-radius:6px;background:rgba(251,191,36,.2);color:#fcd34d;font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:99px;background:rgba(255,255,255,.15);overflow:hidden;padding:2px}
+.bar i{display:block;height:100%;width:100%;border-radius:99px;background:linear-gradient(90deg,#fbbf24,#ec4899,#22d3ee);transform-origin:left;transform:scaleX(0)}
+.bar i.run{animation:fill 3s linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+
+/* Stage video: chia bố cục flex dọc để video tự co vừa khít phần không gian còn lại */
+.vhead{margin-bottom:10px;flex:none}
+.tag{display:inline-block;padding:3px 14px;border-radius:99px;background:rgba(15,40,75,.75);border:1px solid rgba(251,191,36,.5);color:#fcd34d;font-size:11px;font-weight:700;margin-bottom:4px}
+.vhead .title{font-size:clamp(18px,min(3.4vw,3.5vh),30px)}
+.vhead .sub{font-size:clamp(12px,1.5vw,14px);margin-top:3px}
+
+/* Vùng đệm bao quanh khung video tự co giãn (flex:1; min-height:0) */
+.fbox{flex:1;min-height:0;width:100%;display:flex;align-items:center;justify-content:center;padding:8px}
+
+/* Khung viền vàng ôm sát đúng kích thước video, không bao giờ tràn */
+.frame{position:relative;max-width:100%;max-height:100%;aspect-ratio:16/9;padding:7px;border-radius:22px;background:rgba(15,40,75,.9);border:2px solid rgba(255,215,0,.55);
+  box-shadow:0 12px 35px rgba(15,40,75,.45),0 0 45px rgba(255,215,0,.3);display:flex}
+.frame::after{content:"";position:absolute;inset:-2px;border-radius:24px;pointer-events:none;opacity:0;
+  box-shadow:0 0 40px rgba(0,242,254,.7),0 0 70px rgba(255,215,0,.5);animation:glow 4s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:0}50%{opacity:1}}
+.corner{position:absolute;font-size:20px;pointer-events:none;animation:spin 6s linear infinite;z-index:6}
+.c1{top:-10px;left:-10px}.c2{top:-10px;right:-10px}.c3{bottom:-10px;left:-10px}.c4{bottom:-10px;right:-10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.vwrap{position:relative;width:100%;height:100%;border-radius:15px;overflow:hidden;background:#000}
+video,#fb{width:100%;height:100%;display:block;object-fit:contain;background:#000}
+#fb{position:absolute;inset:0;pointer-events:none}
+#unmute{position:absolute;top:12px;right:12px;z-index:5;padding:8px 14px;border-radius:99px;font-weight:800;font-size:13px;
+  background:linear-gradient(90deg,#fbbf24,#ec4899);color:#0f172a;box-shadow:0 6px 18px rgba(0,0,0,.4);animation:bounce 1s infinite}
+.live{position:absolute;top:12px;left:12px;z-index:5;display:none;align-items:center;gap:6px;padding:4px 12px;border-radius:99px;
+  background:rgba(0,0,0,.65);border:1px solid rgba(255,255,255,.15);font-size:12px;color:#fcd34d;font-weight:600;pointer-events:none}
+.live i{width:8px;height:8px;border-radius:50%;background:#ef4444}
+@media(min-width:640px){.live{display:flex}}
+
+/* Tối ưu cho điện thoại màn hình dọc */
+@media(max-width:640px){
+  main{padding:44px 10px 14px}
+  .fbox{padding:4px}
+  .frame{width:100%;height:auto;padding:5px;border-radius:16px}
+  .corner{font-size:18px}
+  #unmute{padding:7px 12px;font-size:12px;top:10px;right:10px}
+}
+
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+
+<canvas id="fx"></canvas>
+
+<div id="status"><i></i><span id="statusText">Đang bắn pháo hoa khai màn...</span></div>
+
+<main>
+  <!-- STAGE 1 -->
+  <section id="greeting" class="stage">
+    <div class="card">
+      <div class="balloon b1">
+        <svg viewBox="0 0 120 160" fill="none"><path d="M55 115C50 135 65 145 52 158" stroke="#fde047" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="55" cy="58" rx="42" ry="52" fill="url(#pb)"/><ellipse cx="40" cy="38" rx="10" ry="18" transform="rotate(-20 40 38)" fill="#fff" fill-opacity=".45"/><polygon points="50,110 60,110 64,117 46,117" fill="#ec4899"/><defs><radialGradient id="pb" gradientUnits="userSpaceOnUse" gradientTransform="translate(40 40) rotate(55) scale(75)"><stop stop-color="#ff7eb3"/><stop offset=".6" stop-color="#ff2a85"/><stop offset="1" stop-color="#9d174d"/></radialGradient></defs></svg>
+      </div>
+      <div class="balloon b2">
+        <svg viewBox="0 0 120 160" fill="none"><path d="M62 115C68 132 50 145 64 158" stroke="#fde047" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="62" cy="58" rx="42" ry="52" fill="url(#cb)"/><ellipse cx="47" cy="38" rx="10" ry="18" transform="rotate(-20 47 38)" fill="#fff" fill-opacity=".45"/><polygon points="57,110 67,110 71,117 53,117" fill="#06b6d4"/><defs><radialGradient id="cb" gradientUnits="userSpaceOnUse" gradientTransform="translate(47 40) rotate(55) scale(75)"><stop stop-color="#a5f3fc"/><stop offset=".55" stop-color="#00f2fe"/><stop offset="1" stop-color="#0369a1"/></radialGradient></defs></svg>
+      </div>
+
+      <div class="icons">
+        <span>🎉</span>
+        <div class="trophy"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3h14a2 2 0 0 1 2 2v2a5 5 0 0 1-3.07 4.62A7.01 7.01 0 0 1 13 15.92V19h4a1 1 0 1 1 0 2H7a1 1 0 1 1 0-2h4v-3.08A7.01 7.01 0 0 1 6.07 11.62 5 5 0 0 1 3 7V5a2 2 0 0 1 2-2zm0 2v2a3 3 0 0 0 1.24 2.43A7.03 7.03 0 0 1 6 9V5H5zm14 0h-1v4c0 .15-.01.29-.02.43A3 3 0 0 0 19 7V5z"/></svg></div>
+        <span>🎊</span>
+      </div>
+
+      <h1 id="mainTitle" class="title">CHÚC MỪNG! <br>FREYA-SAN'S 5TH WORK ANNIVERSARY ✨</h1>
+
+      <div class="cd">
+        <div class="cd-row"><span>⏳ Món quà video sắp bắt đầu...</span><b id="cdNum">3.0s</b></div>
+        <div class="bar"><i id="cdBar"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE 2 -->
+  <section id="videoStage" class="stage off">
+    <div class="vhead">
+      <h2 id="vTitle" class="title">FREYA-SAN'S 5TH WORK ANNIVERSARY ✨</h2>
+      <p id="vSub" class="sub">Keep shining, keep inspiring, and keep being amazing! Here's to more success, laughter, and unforgettable moments with TIGER 💖✨
+ <br>Chúc Freya-san luôn rạng rỡ, tràn đầy năng lượng và tiếp tục chinh phục thêm nhiều cột mốc đáng tự hào!  </p>
+    </div>
+
+    <div class="fbox">
+      <div class="frame">
+        <div class="corner c1">✨</div><div class="corner c2">🌟</div><div class="corner c3">🎉</div><div class="corner c4">🎊</div>
+        <div class="vwrap">
+          <video id="vid" playsinline loop muted controls preload="metadata"
+                 poster="https://placehold.co/1280x720/123058/ffd700?text=Chuc+Mung+Dac+Biet">
+            <source src="FREYA.mp4" type="video/mp4">
+          </video>
+          <canvas id="fb" class="hidden"></canvas>
+          <button id="unmute" type="button">🔊 Bật âm thanh &amp; Nhạc</button>
+          <div class="live"><i></i>Đang phát</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+
+const LITE = (navigator.hardwareConcurrency || 4) <= 4 || matchMedia('(max-width:640px)').matches ||
+             matchMedia('(prefers-reduced-motion:reduce)').matches;
+const SPARKS_PER_BURST = LITE ? 26 : 42;
+const CONFETTI_PER_BURST = LITE ? 4 : 8;
+const MAX_SPARKS = LITE ? 260 : 480;
+const MAX_CONFETTI = LITE ? 50 : 110;
+const MAX_ROCKETS = 10;
+
+let ac = null, noiseBuf = null;
+function initAudio() {
+  if (ac) { if (ac.state === 'suspended') ac.resume(); return; }
+  try {
+    ac = new (window.AudioContext || window.webkitAudioContext)();
+    noiseBuf = ac.createBuffer(1, ac.sampleRate * 0.25, ac.sampleRate);
+    const d = noiseBuf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+  } catch (e) { ac = null; }
+}
+let lastPop = 0;
+function playPop() {
+  if (!ac) return;
+  const t = performance.now();
+  if (t - lastPop < 90) return;
+  lastPop = t;
+  const s = ac.createBufferSource(), g = ac.createGain();
+  s.buffer = noiseBuf; g.gain.value = 0.12;
+  s.connect(g).connect(ac.destination); s.start();
+}
+function playFanfare() {
+  if (!ac) return;
+  const seq = [[523.25, 0], [659.25, .18], [783.99, .36], [1046.5, .54]];
+  seq.forEach(([f, dt]) => {
+    const o = ac.createOscillator(), g = ac.createGain(), t = ac.currentTime + dt;
+    o.type = 'triangle'; o.frequency.value = f;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.15, t + .02);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + .5);
+    o.connect(g).connect(ac.destination); o.start(t); o.stop(t + .55);
+  });
+}
+
+const canvas = $('fx');
+const ctx = canvas.getContext('2d', { alpha: true });
+let cw = 0, ch = 0;
+function resize() {
+  cw = canvas.width = innerWidth;
+  ch = canvas.height = innerHeight;
+}
+resize();
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(resize, 150); });
+
+const palette = ['#FFD700', '#FF2A85', '#00F2FE', '#7CFC00', '#FF7F50', '#E040FB', '#FFF59D', '#FFFFFF'];
+const rand = (a, b) => Math.random() * (b - a) + a;
+const pick = () => palette[(Math.random() * palette.length) | 0];
+
+const sprites = {};
+palette.forEach(c => {
+  const s = document.createElement('canvas'); s.width = s.height = 32;
+  const g = s.getContext('2d');
+  const grd = g.createRadialGradient(16, 16, 0, 16, 16, 16);
+  grd.addColorStop(0, '#fff'); grd.addColorStop(.25, c); grd.addColorStop(1, 'rgba(0,0,0,0)');
+  g.fillStyle = grd; g.fillRect(0, 0, 32, 32);
+  sprites[c] = s;
+});
+
+const rockets = [], sparks = [], confetti = [];
+const stars = Array.from({ length: LITE ? 16 : 28 }, () => ({
+  x: Math.random(), y: Math.random(), r: rand(1, 2.4), sp: rand(.0002, .0006), c: pick(), ph: Math.random() * 6
+}));
+
+function explode(x, y, color) {
+  playPop();
+  const c2 = pick();
+  const n = Math.min(SPARKS_PER_BURST, MAX_SPARKS - sparks.length);
+  for (let i = 0; i < n; i++) {
+    const a = Math.random() * 6.2832, sp = rand(2, 8.5);
+    sparks.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+      life: 1, decay: rand(.014, .026), size: rand(10, 18),
+      c: i % 3 === 0 ? '#FFFFFF' : (i % 2 ? color : c2) });
+  }
+  const m = Math.min(CONFETTI_PER_BURST, MAX_CONFETTI - confetti.length);
+  for (let j = 0; j < m; j++) {
+    confetti.push({ x, y, vx: rand(-5, 5), vy: rand(-8, -2), w: rand(7, 12), h: rand(4, 8),
+      rot: Math.random() * 6.28, vr: rand(-.14, .14), c: pick(), a: 1 });
+  }
+}
+
+function launch() {
+  if (rockets.length >= MAX_ROCKETS) return;
+  const sx = rand(cw * .15, cw * .85), tx = sx + rand(-120, 120), ty = rand(ch * .12, ch * .48);
+  const ang = Math.atan2(ty - ch, tx - sx), sp = rand(11, 15);
+  rockets.push({ x: sx, y: ch, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, ty, c: pick(), px: sx, py: ch });
+}
+
+function grandBurst() {
+  initAudio(); playFanfare();
+  for (let i = 0; i < (LITE ? 4 : 7); i++) setTimeout(launch, i * 110);
+}
+
+let intense = true, last = 0, lastLaunch = 0;
+function loop(ts) {
+  requestAnimationFrame(loop);
+  if (ts - last < 28) return;
+  last = ts;
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.clearRect(0, 0, cw, ch);
+
+  for (const s of stars) {
+    s.y -= s.sp * 16; if (s.y < 0) s.y = 1;
+    ctx.globalAlpha = .35 + Math.sin(ts * .004 + s.ph) * .3;
+    ctx.fillStyle = s.c;
+    ctx.fillRect(s.x * cw, s.y * ch, s.r * 1.6, s.r * 1.6);
+  }
+
+  const interval = intense ? 320 : 1800;
+  if (ts - lastLaunch > interval) {
+    launch(); if (intense && !LITE && Math.random() > .5) launch();
+    lastLaunch = ts;
+  }
+
+  ctx.globalAlpha = 1; ctx.lineWidth = 2.5; ctx.lineCap = 'round';
+  for (let i = rockets.length - 1; i >= 0; i--) {
+    const r = rockets[i];
+    r.px = r.x; r.py = r.y;
+    r.x += r.vx; r.y += r.vy; r.vy += .12;
+    ctx.strokeStyle = r.c; ctx.beginPath(); ctx.moveTo(r.px - r.vx * 2, r.py - r.vy * 2); ctx.lineTo(r.x, r.y); ctx.stroke();
+    if (r.y <= r.ty || r.vy >= -1.5) { explode(r.x, r.y, r.c); rockets.splice(i, 1); }
+  }
+
+  ctx.globalCompositeOperation = 'lighter';
+  for (let i = sparks.length - 1; i >= 0; i--) {
+    const p = sparks[i];
+    p.vx *= .96; p.vy = p.vy * .96 + .14; p.x += p.vx; p.y += p.vy; p.life -= p.decay;
+    if (p.life <= 0) { sparks[i] = sparks[sparks.length - 1]; sparks.pop(); continue; }
+    ctx.globalAlpha = p.life;
+    ctx.drawImage(sprites[p.c], p.x - p.size / 2, p.y - p.size / 2, p.size, p.size);
+  }
+
+  ctx.globalCompositeOperation = 'source-over';
+  for (let i = confetti.length - 1; i >= 0; i--) {
+    const c = confetti[i];
+    c.x += c.vx; c.y += c.vy; c.vy += .15; c.vx *= .98; c.rot += c.vr;
+    if (c.y > ch - 60) c.a -= .04;
+    if (c.a <= 0 || c.y > ch + 20) { confetti[i] = confetti[confetti.length - 1]; confetti.pop(); continue; }
+    ctx.globalAlpha = c.a;
+    const cos = Math.cos(c.rot), sin = Math.sin(c.rot);
+    ctx.setTransform(cos, sin, -sin, cos, c.x, c.y);
+    ctx.fillStyle = c.c; ctx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+  }
+  ctx.globalAlpha = 1;
+}
+
+const greeting = $('greeting'), videoStage = $('videoStage');
+const cdBar = $('cdBar'), cdNum = $('cdNum'), statusText = $('statusText');
+const vid = $('vid'), unmuteBtn = $('unmute');
+let seqTimer = 0, cdRaf = 0;
+
+function startSequence() {
+  clearTimeout(seqTimer); cancelAnimationFrame(cdRaf);
+  vid.pause(); try { vid.currentTime = 0; } catch (e) {}
+
+  videoStage.classList.add('off');
+  greeting.classList.remove('off');
+  statusText.textContent = '🎆 Đang bắn pháo hoa chúc mừng (chuyển sang Video sau 3s)...';
+  intense = true;
+
+  for (let i = 0; i < (LITE ? 3 : 5); i++) setTimeout(launch, i * 140);
+  explode(cw * .25, ch * .28, '#FFD700');
+  explode(cw * .75, ch * .28, '#FF2A85');
+
+  cdBar.classList.remove('run'); void cdBar.offsetWidth; cdBar.classList.add('run');
+
+  const t0 = performance.now(); let lastTxt = -1;
+  (function tick(now) {
+    const left = Math.max(0, 3000 - (now - t0));
+    const txt = Math.ceil(left / 100);
+    if (txt !== lastTxt) { cdNum.textContent = (left / 1000).toFixed(1) + 's'; lastTxt = txt; }
+    if (left > 0) cdRaf = requestAnimationFrame(tick);
+  })(t0);
+
+  seqTimer = setTimeout(toVideo, 3000);
+}
+
+function toVideo() {
+  intense = false;
+  greeting.classList.add('off');
+  videoStage.classList.remove('off');
+  statusText.textContent = '🎬 Đang phát Video chúc mừng đặc biệt!';
+  explode(cw * .15, ch * .35, '#FFD700');
+  explode(cw * .85, ch * .35, '#00F2FE');
+  vid.muted = true;
+  const p = vid.play();
+  if (p && p.catch) p.catch(() => {});
+}
+
+function enableAudio() {
+  initAudio(); playFanfare();
+  vid.muted = false; vid.volume = 1;
+  vid.play().catch(() => {});
+  unmuteBtn.classList.add('hidden');
+  grandBurst();
+}
+
+let fbOn = false;
+function fallbackAnim() {
+  const fb = $('fb'); fb.classList.remove('hidden');
+  if (fbOn) return; fbOn = true;
+  const g = fb.getContext('2d'); fb.width = 480; fb.height = 270;
+  let f = 0;
+  (function d() {
+    if (!fbOn) return;
+    f++;
+    g.fillStyle = '#123058'; g.fillRect(0, 0, 480, 270);
+    for (let i = 0; i < 10; i++) {
+      g.beginPath();
+      g.arc((Math.sin(f * .02 + i) * .4 + .5) * 480, (Math.cos(f * .03 + i * 1.5) * .4 + .5) * 270, 5 + (i % 4) * 3, 0, 6.28);
+      g.fillStyle = palette[i % palette.length]; g.fill();
+    }
+    g.fillStyle = '#FFD700'; g.font = 'bold 24px sans-serif'; g.textAlign = 'center';
+    g.fillText('🎉 TIGER FAMILY 🎉', 240, 140);
+    requestAnimationFrame(d);
+  })();
+}
+function stopFallback() { fbOn = false; $('fb').classList.add('hidden'); }
+vid.addEventListener('error', fallbackAnim, true);
+vid.addEventListener('playing', stopFallback);
+
+unmuteBtn.onclick = enableAudio;
+addEventListener('pointerdown', initAudio, { once: true });
+document.addEventListener('visibilitychange', () => { if (document.hidden) vid.pause(); });
+
+requestAnimationFrame(loop);
+startSequence();
+})();
+</script>
+</body>
+</html>
