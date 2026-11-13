@@ -79,7 +79,7 @@ main{position:relative;z-index:20;width:100%;height:100dvh;display:flex;align-it
 /* Stage video: header cao tự nhiên (không cố định), vùng video chiếm phần còn lại */
 .vhead{margin-bottom:8px;flex:none;width:100%}
 .tag{display:inline-block;padding:3px 14px;border-radius:99px;background:rgba(15,40,75,.75);border:1px solid rgba(251,191,36,.5);color:#fcd34d;font-size:11px;font-weight:700;margin-bottom:4px}
-.vhead .title{font-size:clamp(16px,min(3.4vw,3.6vh),40px)}
+.vhead .title{font-size:clamp(16px,min(3.4vw,3.6vh),30px)}
 .vhead .sub{font-size:clamp(11px,min(1.5vw,2vh),14px);margin-top:3px}
 
 /* Vùng video: chiếm hết chiều cao còn lại, là container để đo kích thước thật */
@@ -159,7 +159,7 @@ video,#fb{width:100%;height:100%;display:block;object-fit:contain;background:#00
   <!-- STAGE 2 -->
   <section id="videoStage" class="stage off">
     <div class="vhead">
-      
+      <div class="tag">🎬 KHOẢNH KHẮC ĐẶC BIỆT</div>
       <h2 id="vTitle" class="title">FREYA-SAN'S 5TH WORK ANNIVERSARY ✨</h2>
       <p id="vSub" class="sub">Keep shining, keep inspiring, and keep being amazing! Here's to more success, laughter, and unforgettable moments with TIGER 💖✨
  <br>Chúc Freya-san luôn rạng rỡ, tràn đầy năng lượng và tiếp tục chinh phục thêm nhiều cột mốc đáng tự hào!  </p>
@@ -203,7 +203,8 @@ function initAudio() {
   } catch (e) { ac = null; }
 }
 let lastPop = 0;
-function playPop() { return;
+function playPop() {
+  return;
   if (!ac) return;
   const t = performance.now();
   if (t - lastPop < 90) return;
@@ -458,13 +459,13 @@ function startSequence() {
 
   const t0 = performance.now(); let lastTxt = -1;
   (function tick(now) {
-    const left = Math.max(0, 4000 - (now - t0));
+    const left = Math.max(0, 3000 - (now - t0));
     const txt = Math.ceil(left / 100);
     if (txt !== lastTxt) { cdNum.textContent = (left / 1000).toFixed(1) + 's'; lastTxt = txt; }
     if (left > 0) cdRaf = requestAnimationFrame(tick);
   })(t0);
 
-  seqTimer = setTimeout(toVideo, 4000);
+  seqTimer = setTimeout(toVideo, 3000);
 }
 
 function toVideo() {
